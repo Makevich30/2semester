@@ -78,3 +78,9 @@ int main() {
 
     return 0;
 }
+// 5
+// Toyota ABC123 Ivanov 2018 90000
+// Honda XYZ789 Petrov 2019 110000
+// Ford DEF456 Sidorov 2017 80000
+// Chevrolet GHI789 Smirnov 2020 95000
+// Nissan JKL012 Kuznetsov 2016 120000
