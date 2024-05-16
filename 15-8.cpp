@@ -5,14 +5,12 @@
 
 using namespace std;
 
-// Односвязный список узлов
 struct Node {
     int data;
     Node* next;
     Node(int d) : data(d), next(nullptr) {}
 };
 
-// Класс для работы со списком
 class List {
 private:
     Node* head;
@@ -50,7 +48,6 @@ public:
     }
 };
 
-// Класс для работы с двусвязным списком
 class DoubleLinkedList {
 private:
     struct Node {
@@ -150,3 +147,13 @@ int main() {
 
     return 0;
 }
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6
+// 7
+// 8
+// 9
+// 10
