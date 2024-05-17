@@ -30,6 +30,6 @@ int main() {
 
     return 0;
 }
-// This is a test.
-// Short string.
-// Another string.
+// самая длинная строка
+// короткая строка
+// совсем друга строка
