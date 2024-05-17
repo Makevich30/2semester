@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int sum_digits(int n) {
+int sumOfDigits(int n) {
     int sum = 0;
     while (n > 0) {
         sum += n % 10;
@@ -13,63 +13,71 @@ int sum_digits(int n) {
     return sum;
 }
 
-void print_sums(ifstream& infile, ofstream& outfile) {
-    int a, b;
-    infile >> a >> b;
-    for (int i = a; i <= b; i++) {
-        outfile << i << ": " << sum_digits(i) << endl;
+void readData(const string& inputFile, int& a, int& b, int& sumValue, int& A) {
+    ifstream fin(inputFile);
+    if (fin.is_open()) {
+        fin >> a >> b >> sumValue >> A;
+        fin.close();
     }
 }
 
-void print_numbers_with_sum(ifstream& infile, ofstream& outfile) {
-    int a, b, sum;
-    infile >> a >> b >> sum;
-    for (int i = a; i <= b; i++) {
-        if (sum_digits(i) == sum) {
-            outfile << i << endl;
+void writeData(const string& outputFile, const vector<int>& results) {
+    ofstream fout(outputFile);
+    if (fout.is_open()) {
+        for (int result : results) {
+            fout << result << endl;
         }
+        fout.close();
     }
-}
-
-void print_numbers_with_odd_sum(ifstream& infile, ofstream& outfile) {
-    int a, b;
-    infile >> a >> b;
-    for (int i = a; i <= b; i++) {
-        if (sum_digits(i) % 2 == 1) {
-            outfile << i << endl;
-        }
-    }
-}
-
-void print_prev_number_with_same_sum(ifstream& infile, ofstream& outfile) {
-    int a;
-    infile >> a;
-    int sum = sum_digits(a);
-    int prev_sum = sum + 1;
-    while (prev_sum != sum) {
-        a--;
-        prev_sum = sum_digits(a);
-    }
-    outfile << a << endl;
 }
 
 int main() {
-    ifstream infile("input.txt");
-    ofstream outfile("output.txt");
+    string inputFile = "input.txt";
+    string outputFile = "output.txt";
 
-    print_sums(infile, outfile);
-    outfile << endl;
+    int a, b, sumValue, A;
+    readData(inputFile, a, b, sumValue, A);
 
-    print_numbers_with_sum(infile, outfile);
-    outfile << endl;
+    vector<int> results;
 
-    print_numbers_with_odd_sum(infile, outfile);
-    outfile << endl;
+    cout << "Сумма цифр для чисел от " << a << " до " << b << ":" << endl;
+    for (int i = a; i <= b; ++i) {
+        int sum = sumOfDigits(i);
+        cout << "Число: " << i << ", Сумма цифр: " << sum << endl;
+    }
 
-    print_prev_number_with_same_sum(infile, outfile);
+    cout << "Числа с суммой цифр равной " << sumValue << ":" << endl;
+    for (int i = a; i <= b; ++i) {
+        if (sumOfDigits(i) == sumValue) {
+            cout << i << endl;
+            results.push_back(i);
+        }
+    }
 
-    infile.close();
-    outfile.close();
+    cout << "Числа с нечетной суммой цифр:" << endl;
+    for (int i = a; i <= b; ++i) {
+        if (sumOfDigits(i) % 2 != 0) {
+            cout << i << endl;
+            results.push_back(i);
+        }
+    }
+
+    int targetSum = sumOfDigits(A);
+    int previousNumber = -1;
+    for (int i = A - 1; i >= a; --i) {
+        if (sumOfDigits(i) == targetSum) {
+            previousNumber = i;
+            break;
+        }
+    }
+    if (previousNumber != -1) {
+        cout << "Предшествующее число для " << A << " с той же суммой цифр: " << previousNumber << endl;
+        results.push_back(previousNumber);
+    } else {
+        cout << "Нет предшествующего числа для " << A << " с той же суммой цифр в заданном диапазоне." << endl;
+    }
+
+    writeData(outputFile, results);
 
     return 0;
 }
