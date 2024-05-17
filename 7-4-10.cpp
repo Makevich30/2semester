@@ -5,30 +5,26 @@
 
 using namespace std;
 
-// Функция для вычисления результата выражения
-double calculateExpression(const string& expression) {
-    istringstream iss(expression);
-    double operand1, operand2;
-    char operation;
-    iss >> operand1 >> operation >> operand2;
-
-    switch (operation) {
-        case '+':
-            return operand1 + operand2;
-        case '-':
-            return operand1 - operand2;
-    }
-}
-
 int main() {
     ifstream inputFile("input.txt");
     ofstream outputFile("output.txt");
-    string expression;
-    getline(inputFile, expression);
-
-    double result = calculateExpression(expression);
-
-    outputFile << "Решение примера: " << result << endl;
+    int n, sign, result=0;
+    
+    while(inputFile >> n){
+        if (n == '+'){
+            sign = 1;
+            continue;
+        }
+        else if (n == '-'){
+            sign = -1;
+            continue;
+        }
+        if (sign = -1){
+            result += n;
+        }
+        else result += n;
+    }
+    outputFile << result;
 
     inputFile.close();
     outputFile.close();
